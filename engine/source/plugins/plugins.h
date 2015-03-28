@@ -27,7 +27,7 @@
 #include "platform/event.h"
 #endif
 
-#ifndef _WINDOWS_
+#ifdef _WINDOWS_
 #include <windows.h> 
 #endif
 
@@ -49,7 +49,11 @@ namespace Plugins
    {
       protected:
          bool        mLoaded;
+#ifdef _WINDOWS_
          HINSTANCE   mHInst;
+#else
+         void       *mHInst;
+#endif
          char        mPath[1024];
 
       public:

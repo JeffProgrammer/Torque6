@@ -92,7 +92,7 @@ namespace SysGUI
          mouseScroll, 
          size.x, size.y, 
          inputChar, 
-         Graphics::ViewTable::SysGUI); 
+         Graphics::SysGUI);
 
       mouseScroll = 0;
 
@@ -103,7 +103,7 @@ namespace SysGUI
 
          switch (elem->_type)
          {
-            case Element::Type::BeginScrollArea:
+            case Element::BeginScrollArea:
                if ( elem->_hidden || hideGroup > 0 )
                {
                   hideGroup++;
@@ -118,7 +118,7 @@ namespace SysGUI
                }
                break;
 
-            case Element::Type::EndScrollArea:
+            case Element::EndScrollArea:
                if ( hideGroup > 0 ) 
                {
                   hideGroup--;
@@ -127,12 +127,12 @@ namespace SysGUI
                imguiEndScrollArea();
                break;
 
-            case Element::Type::Label:
+            case Element::Label:
                if ( elem->_hidden || hideGroup > 0 ) break;
                imguiLabel(elem->_value_label.val);
                break;
 
-            case Element::Type::List:
+            case Element::List:
                if ( elem->_hidden || hideGroup > 0 ) break;
                for(S32 i = 0; i < elem->_value_list.size(); ++i )
                {
@@ -163,12 +163,12 @@ namespace SysGUI
                }
                break;
 
-            case Element::Type::TextInput:
+            case Element::TextInput:
                if ( elem->_hidden || hideGroup > 0 ) break;
                imguiInput(elem->_value_label.val, elem->_value_text.val, 32);
                break;
 
-            case Element::Type::Button:
+            case Element::Button:
                if ( elem->_hidden || hideGroup > 0 ) break;
                if ( imguiButton(elem->_value_label.val) )
                {
@@ -179,18 +179,18 @@ namespace SysGUI
                }
                break;
 
-            case Element::Type::CheckBox:
+            case Element::CheckBox:
                if ( elem->_hidden || hideGroup > 0 ) break;
                if ( imguiCheck(elem->_value_label.val, elem->_value_bool) )
                   elem->_value_bool = !elem->_value_bool;
                break;
 
-            case Element::Type::Slider:
+            case Element::Slider:
                if ( elem->_hidden || hideGroup > 0 ) break;
                imguiSlider(elem->_value_label.val, elem->_value_int, elem->_min, elem->_max);
                break;
 
-            case Element::Type::Separator:
+            case Element::Separator:
                if ( elem->_hidden || hideGroup > 0 ) break;
                imguiSeparatorLine();
                break;
@@ -213,7 +213,7 @@ namespace SysGUI
       mouseScroll = 0;
 
       // Keyboard Input
-      if ( event->deviceType == InputDeviceTypes::KeyboardDeviceType && event->ascii > 0 )
+      if ( event->deviceType == KeyboardDeviceType && event->ascii > 0 )
       {
          char c = event->ascii;
 
@@ -234,7 +234,7 @@ namespace SysGUI
       }
 
       // Mouse Input
-      if ( event->deviceType == InputDeviceTypes::MouseDeviceType )
+      if ( event->deviceType == MouseDeviceType )
       {
          if ((event->action == SI_MAKE || event->action == SI_REPEAT) && (event->objType == SI_BUTTON))
          {
@@ -338,7 +338,7 @@ namespace SysGUI
    S32 beginScrollArea(const char* title, U32 x, U32 y, U32 width, U32 height)
    {
       Element elem;
-      elem._type = Element::Type::BeginScrollArea;
+      elem._type = Element::BeginScrollArea;
       elem._x = x;
       elem._y = y;
       elem._height = height;
@@ -354,7 +354,7 @@ namespace SysGUI
    S32 endScrollArea()
    {
       Element elem;
-      elem._type = Element::Type::EndScrollArea;
+      elem._type = Element::EndScrollArea;
       return addElement(elem);
    }
 
@@ -369,7 +369,7 @@ namespace SysGUI
 
          switch (elem->_type)
          {
-            case Element::Type::BeginScrollArea:
+            case Element::BeginScrollArea:
                if ( elem->_id == id )
                {
                   clearGroup++;
@@ -381,7 +381,7 @@ namespace SysGUI
                   newElementList.push_back(*elem);
                break;
 
-            case Element::Type::EndScrollArea:
+            case Element::EndScrollArea:
                if ( clearGroup > 0 ) 
                   clearGroup--;
 
@@ -403,7 +403,7 @@ namespace SysGUI
    S32 label(const char* label)
    {
       Element elem;
-      elem._type = Element::Type::Label;
+      elem._type = Element::Label;
 
       dStrcpy(elem._value_label.val, label);
 
@@ -413,7 +413,7 @@ namespace SysGUI
    S32 textInput(const char* label, const char* text)
    {
       Element elem;
-      elem._type = Element::Type::TextInput;
+      elem._type = Element::TextInput;
 
       dStrcpy(elem._value_label.val, label);
       dStrcpy(elem._value_text.val, text);
@@ -424,7 +424,7 @@ namespace SysGUI
    S32 button(const char* label, const char* script, void (*callback)())
    {
       Element elem;
-      elem._type = Element::Type::Button;
+      elem._type = Element::Button;
 
       dStrcpy(elem._value_label.val, label);
       dStrcpy(elem._value_script.val, script);
@@ -436,7 +436,7 @@ namespace SysGUI
    S32 slider(const char* label, S32 value, S32 min, S32 max)
    {
       Element elem;
-      elem._type = Element::Type::Slider;
+      elem._type = Element::Slider;
       elem._value_int = value;
       elem._min = min;
       elem._max = max;
@@ -449,7 +449,7 @@ namespace SysGUI
    S32 checkBox(const char* label, bool value)
    {
       Element elem;
-      elem._type = Element::Type::CheckBox;
+      elem._type = Element::CheckBox;
       elem._value_bool = value;
 
       dStrcpy(elem._value_label.val, label);
@@ -460,14 +460,14 @@ namespace SysGUI
    S32 separator()
    {
       Element elem;
-      elem._type = Element::Type::Separator;
+      elem._type = Element::Separator;
       return addElement(elem);
    }
 
    S32 list(const char* script, void (*callback)())
    {
       Element elem;
-      elem._type = Element::Type::List;
+      elem._type = Element::List;
       elem._selected_list_item = -1;
       dStrcpy(elem._value_script.val, script);
       elem._value_callback = callback;

@@ -33,7 +33,19 @@
 #include "plugins_ScriptBinding.h"
 
 // TODO: Add platform checks
+#ifdef _WINDOWS_
 #include <windows.h> 
+
+#else
+#include <dlfcn.h>
+
+#define LoadLibraryA(path) dlopen(path, RTLD_LAZY)
+
+#define GetProcAddress(library, fn) dlsym(library, fn)
+
+#define FreeLibrary(library) dlclose(library)
+
+#endif
 
 namespace Plugins
 {

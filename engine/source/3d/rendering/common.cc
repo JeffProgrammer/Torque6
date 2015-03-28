@@ -129,15 +129,15 @@ namespace Rendering
       bx::mtxProj(projectionMatrix, 60.0f, float(canvasWidth)/float(canvasHeight), 0.1f, 10000.0f, true);
 
       // Render Layer 0 is the bottom, we want it canvas clear color.
-      bgfx::setViewClear(Graphics::ViewTable::RenderLayer0
+      bgfx::setViewClear(Graphics::RenderLayer0
 		   , BGFX_CLEAR_COLOR|BGFX_CLEAR_DEPTH
          , canvasClearColor
          , 1.0f
 		   , 0
 		);
-      bgfx::setViewRect(Graphics::ViewTable::RenderLayer0, 0, 0, canvasWidth, canvasHeight);
-      bgfx::setViewTransform(Graphics::ViewTable::RenderLayer0, viewMatrix, projectionMatrix);
-      bgfx::submit(Graphics::ViewTable::RenderLayer0);
+      bgfx::setViewRect(Graphics::RenderLayer0, 0, 0, canvasWidth, canvasHeight);
+      bgfx::setViewTransform(Graphics::RenderLayer0, viewMatrix, projectionMatrix);
+      bgfx::submit(Graphics::RenderLayer0);
 
       // Render All Renderable Items ;)
       Renderable::renderAll();

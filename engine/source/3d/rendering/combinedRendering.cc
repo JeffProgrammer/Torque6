@@ -136,8 +136,8 @@ namespace Rendering
       // This projection matrix is used because its a full screen quad.
       F32 proj[16];
       bx::mtxOrtho(proj, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 100.0f);
-      bgfx::setViewTransform(Graphics::ViewTable::RenderLayer2, NULL, proj);
-      bgfx::setViewRect(Graphics::ViewTable::RenderLayer2, 0, 0, canvasWidth, canvasHeight);
+      bgfx::setViewTransform(Graphics::RenderLayer2, NULL, proj);
+      bgfx::setViewRect(Graphics::RenderLayer2, 0, 0, canvasWidth, canvasHeight);
 
       // Flip to screen.
       bgfx::setTexture(0, Graphics::Shader::getTextureUniform(0), Rendering::getFinalTexture(), 0);
@@ -151,6 +151,6 @@ namespace Rendering
 			);
 
       fullScreenQuad(canvasWidth, canvasHeight);
-      bgfx::submit(Graphics::ViewTable::RenderLayer2);
+      bgfx::submit(Graphics::RenderLayer2);
    }
 }

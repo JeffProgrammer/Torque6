@@ -23,6 +23,8 @@
 #ifndef _RUNTIME_CLASSREP_H_
 #define _RUNTIME_CLASSREP_H_
 
+#if 0
+
 #include "console/consoleObject.h"
 #include "console/consoleInternal.h"
 
@@ -211,5 +213,6 @@ template<class T> bool RuntimeClassRep<T>::smConRegistered = false;
     AbstractClassRep::WriteCustomTamlSchema className::getStaticWriteCustomTamlSchema() { return NULL; }            \
     RuntimeClassRep<className> className::dynRTClassRep(#className, "Type" #className, &_sTypeId, 0, -1, 0, className::getParentStaticClassRep())
 
+#endif // 0
 
 #endif

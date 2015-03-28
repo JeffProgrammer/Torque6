@@ -86,16 +86,16 @@ namespace Rendering
 
    void ForwardRendering::preRender()
    {
-      bgfx::setViewFrameBuffer(Graphics::ViewTable::Forward, forwardBuffer);
+      bgfx::setViewFrameBuffer(Graphics::Forward, forwardBuffer);
 
       // Setup Camera/View
-      bgfx::setViewTransform(Graphics::ViewTable::Forward, viewMatrix, projectionMatrix);
-      bgfx::setViewRect(Graphics::ViewTable::Forward, 0, 0, canvasWidth, canvasHeight);
-      bgfx::submit(Graphics::ViewTable::Forward);
+      bgfx::setViewTransform(Graphics::Forward, viewMatrix, projectionMatrix);
+      bgfx::setViewRect(Graphics::Forward, 0, 0, canvasWidth, canvasHeight);
+      bgfx::submit(Graphics::Forward);
 
-      bgfx::setViewFrameBuffer(Graphics::ViewTable::Transparent, forwardBuffer);
-      bgfx::setViewTransform(Graphics::ViewTable::Transparent, viewMatrix, projectionMatrix);
-      bgfx::setViewRect(Graphics::ViewTable::Transparent, 0, 0, canvasWidth, canvasHeight);
+      bgfx::setViewFrameBuffer(Graphics::Transparent, forwardBuffer);
+      bgfx::setViewTransform(Graphics::Transparent, viewMatrix, projectionMatrix);
+      bgfx::setViewRect(Graphics::Transparent, 0, 0, canvasWidth, canvasHeight);
    }
 
    void ForwardRendering::render()

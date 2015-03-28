@@ -90,7 +90,8 @@ namespace Rendering
       lightBuffer = bgfx::createFrameBuffer(canvasWidth, canvasHeight, bgfx::TextureFormat::BGRA8, samplerFlags);
 
       // Final Buffer
-      finalBuffer = bgfx::createFrameBuffer(1, &Rendering::getFinalTexture(), false);
+      bgfx::TextureHandle handle = Rendering::getFinalTexture();
+      finalBuffer = bgfx::createFrameBuffer(1, &handle, false);
    }
 
    void DeferredRendering::destroyBuffers()
@@ -115,42 +116,42 @@ namespace Rendering
       // G-Buffer
       bgfx::setClearColor(0, UINT32_C(0x00000000) );
 
-      bgfx::setViewClear(Graphics::ViewTable::DeferredGeometry
+      bgfx::setViewClear(Graphics::DeferredGeometry
          , BGFX_CLEAR_COLOR|BGFX_CLEAR_DEPTH
          , 1.0f
          , 0
          , 0
          , 0
       );
-      bgfx::setViewRect(Graphics::ViewTable::DeferredGeometry, 0, 0, canvasWidth, canvasHeight);
-      bgfx::setViewFrameBuffer(Graphics::ViewTable::DeferredGeometry, gBuffer);
-      bgfx::setViewTransform(Graphics::ViewTable::DeferredGeometry, viewMatrix, projectionMatrix);
-      bgfx::submit(Graphics::ViewTable::DeferredGeometry);
+      bgfx::setViewRect(Graphics::DeferredGeometry, 0, 0, canvasWidth, canvasHeight);
+      bgfx::setViewFrameBuffer(Graphics::DeferredGeometry, gBuffer);
+      bgfx::setViewTransform(Graphics::DeferredGeometry, viewMatrix, projectionMatrix);
+      bgfx::submit(Graphics::DeferredGeometry);
 
       // Light Buffer
-      bgfx::setViewClear(Graphics::ViewTable::DeferredLight
+      bgfx::setViewClear(Graphics::DeferredLight
          , BGFX_CLEAR_COLOR|BGFX_CLEAR_DEPTH
          , 1.0f
          , 0
          , 0
          , 0
       );
-      bgfx::setViewRect(Graphics::ViewTable::DeferredLight, 0, 0, canvasWidth, canvasHeight);
-      bgfx::setViewFrameBuffer(Graphics::ViewTable::DeferredLight, lightBuffer);
-      bgfx::setViewTransform(Graphics::ViewTable::DeferredLight, viewMatrix, projectionMatrix);
-      bgfx::submit(Graphics::ViewTable::DeferredLight);
+      bgfx::setViewRect(Graphics::DeferredLight, 0, 0, canvasWidth, canvasHeight);
+      bgfx::setViewFrameBuffer(Graphics::DeferredLight, lightBuffer);
+      bgfx::setViewTransform(Graphics::DeferredLight, viewMatrix, projectionMatrix);
+      bgfx::submit(Graphics::DeferredLight);
 
       // Final Buffer
-      bgfx::setViewClear(Graphics::ViewTable::DeferredCombined
+      bgfx::setViewClear(Graphics::DeferredCombined
          , BGFX_CLEAR_COLOR|BGFX_CLEAR_DEPTH
          , 1.0f
          , 0
          , 0
       );
-      bgfx::setViewRect(Graphics::ViewTable::DeferredCombined, 0, 0, canvasWidth, canvasHeight);
-      bgfx::setViewFrameBuffer(Graphics::ViewTable::DeferredCombined, finalBuffer);
-      bgfx::setViewTransform(Graphics::ViewTable::DeferredCombined, viewMatrix, projectionMatrix);
-      bgfx::submit(Graphics::ViewTable::DeferredCombined);
+      bgfx::setViewRect(Graphics::DeferredCombined, 0, 0, canvasWidth, canvasHeight);
+      bgfx::setViewFrameBuffer(Graphics::DeferredCombined, finalBuffer);
+      bgfx::setViewTransform(Graphics::DeferredCombined, viewMatrix, projectionMatrix);
+      bgfx::submit(Graphics::DeferredCombined);
    }
 
    void DeferredRendering::render()
@@ -163,8 +164,8 @@ namespace Rendering
       // This projection matrix is used because its a full screen quad.
       F32 proj[16];
       bx::mtxOrtho(proj, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 100.0f);
-      bgfx::setViewTransform(Graphics::ViewTable::DeferredCombined, NULL, proj);
-      bgfx::setViewRect(Graphics::ViewTable::DeferredCombined, 0, 0, canvasWidth, canvasHeight);
+      bgfx::setViewTransform(Graphics::DeferredCombined, NULL, proj);
+      bgfx::setViewRect(Graphics::DeferredCombined, 0, 0, canvasWidth, canvasHeight);
 
       // Combine Color + Light
       bgfx::setTexture(0, Graphics::Shader::getTextureUniform(0), gBuffer, 0);
@@ -178,6 +179,6 @@ namespace Rendering
          );
 
       fullScreenQuad(canvasWidth, canvasHeight);
-      bgfx::submit(Graphics::ViewTable::DeferredCombined);
+      bgfx::submit(Graphics::DeferredCombined);
    }
 }

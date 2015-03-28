@@ -640,7 +640,7 @@ void TextureManager::refresh( TextureObject* pTextureObject )
     }
     else
     {
-       if ( pNewBitmap->getFormat() == GBitmap::BitmapFormat::RGBA )
+       if ( pNewBitmap->getFormat() == GBitmap::RGBA )
        {
           // Convert to BGRA
           U32 count = pNewBitmap->getWidth() * pNewBitmap->getHeight();
@@ -665,10 +665,10 @@ void TextureManager::refresh( TextureObject* pTextureObject )
        }
 
        // TODO: Finish texture loading in all its glorious forms.
-       if ( pNewBitmap->getFormat() == GBitmap::BitmapFormat::Alpha )
+       if ( pNewBitmap->getFormat() == GBitmap::Alpha )
           pTextureObject->mBGFXTexture = bgfx::createTexture2D(pNewBitmap->getWidth(), pNewBitmap->getHeight(), 0, bgfx::TextureFormat::R8, BGFX_TEXTURE_MIN_POINT|BGFX_TEXTURE_MAG_POINT|BGFX_TEXTURE_MIP_POINT);
 
-       if ( pNewBitmap->getFormat() == GBitmap::BitmapFormat::RGB )
+       if ( pNewBitmap->getFormat() == GBitmap::RGB )
        {
           // Convert to BGRA
           U32 count = pNewBitmap->getWidth() * pNewBitmap->getHeight();
@@ -692,7 +692,7 @@ void TextureManager::refresh( TextureObject* pTextureObject )
 						   );
        }
 
-       if ( pNewBitmap->getFormat() == GBitmap::BitmapFormat::DDS )
+       if ( pNewBitmap->getFormat() == GBitmap::DDS )
        {
           Con::printf("Asking to load DDS!");
           const bgfx::Memory* mem = NULL;

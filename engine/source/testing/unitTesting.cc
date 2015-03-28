@@ -20,6 +20,8 @@
 // IN THE SOFTWARE.
 //-----------------------------------------------------------------------------
 
+#ifndef __APPLE__
+
 // We don't want tests in a shipping version.
 #ifndef TORQUE_SHIPPING
 
@@ -82,3 +84,5 @@ class TorqueUnitTestListener : public ::testing::EmptyTestEventListener
 #include "unitTesting_ScriptBinding.h"
 
 #endif // TORQUE_SHIPPING
+
+#endif

@@ -7,7 +7,6 @@
 
 		includedirs {
             "../../engine/lib/bgfx/include",
-            "../../engine/lib/bgfx/include/compat/msvc",
             "../../engine/lib/bgfx/3rdparty",
             "../../engine/lib/bgfx/3rdparty/khronos",
             "../../engine/lib/bgfx/3rdparty/fcpp",
@@ -17,8 +16,18 @@
             "../../engine/lib/bgfx/3rdparty/glsl-optimizer/src/mesa",
             "../../engine/lib/bgfx/3rdparty/glsl-optimizer/src/getopt",
             "../../engine/lib/bgfx/3rdparty/glsl-optimizer/src",
-            "$(DXSDK_DIR)/Include",
 		}
+
+		configuration { "xcode3 or xcode4 or osx or ios" }
+			includedirs {
+				"../../engine/lib/bgfx/include/compat/osx",
+			}
+
+		configuration { "vs20* or mingw*" }
+			includedirs {
+				"../../engine/lib/bgfx/include/compat/msvc",
+				"$(DXSDK_DIR)/Include",
+			}
 
 		files {
 			"../../engine/lib/bgfx/src/**.h",
@@ -49,6 +58,11 @@
 			"../../engine/lib/bgfx/tools/shaderc/**.h",
             "../../engine/lib/bgfx/tools/shaderc/**.cpp",
 		}
+
+		configuration { "xcode3 or xcode4 or osx or ios" }
+			files {
+				"../../engine/lib/bgfx/src/**.mm",
+			}
 
         removefiles {
             "../../engine/lib/bgfx/src/**.bin.h",
@@ -88,7 +102,7 @@
 
 		configuration "macosx"
 			targetdir   "../bin/darwin"
-			links       { "CoreServices.framework" }
+			links       { "CoreServices.framework", "Cocoa.framework" }
 
 		configuration { "macosx", "gmake" }
 			buildoptions { "-mmacosx-version-min=10.4" }
