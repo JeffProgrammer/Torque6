@@ -33,6 +33,11 @@
 // platforms.  They are subject to change without notice.  DO NOT USE
 // THEM IN USER CODE.
 
+// http://code.opencv.org/issues/2264
+#ifdef __llvm__
+#define GTEST_USE_OWN_TR1_TUPLE 1
+#endif // __llvm__
+
 #ifndef GTEST_INCLUDE_GTEST_INTERNAL_GTEST_PORT_H_
 #define GTEST_INCLUDE_GTEST_INTERNAL_GTEST_PORT_H_
 
