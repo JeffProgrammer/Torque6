@@ -46,7 +46,11 @@ S32 Platform::getBackgroundSleepTime()
 
 void Platform::cprintf( const char* str )
 {
+#ifdef __APPLE__
+    if ( fileno(stdout) > 0 )
+#else
    if ( _fileno(stdout) > 0 )
+#endif // __APPLE__
       printf( "%s \n", str );
 }
 

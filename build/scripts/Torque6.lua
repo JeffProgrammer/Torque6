@@ -51,12 +51,12 @@
 			}
 
 		configuration "Debug"
-            targetname "Torque6_DEBUG"
+         targetname "Torque6_DEBUG"
 			defines     { "TORQUE_DEBUG",
                           "TORQUE_ENABLE_PROFILER",
                           "TORQUE_DEBUG_GUARD",
                         }
-            buildoptions { "/DEBUG" }
+         flags { "Symbols" }
 
 		configuration "Release"
 			defines     {  }
