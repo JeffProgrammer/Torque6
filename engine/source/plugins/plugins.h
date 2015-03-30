@@ -72,7 +72,7 @@ namespace Plugins
          virtual void postRender();
 
          // Function Pointers
-         PLUGIN_FUNC_PTR(create, PluginLink link)
+         PLUGIN_FUNC_PTR(create)
          PLUGIN_FUNC_PTR(destroy)
 
          PLUGIN_FUNC_PTR(interpolateTick, F32 delta)
