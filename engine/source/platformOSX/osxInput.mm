@@ -23,6 +23,7 @@
 #import "platform/platformInput.h"
 #import "platformOSX/osxInputManager.h"
 #import "platform/event.h"
+#import <Cocoa/Cocoa.h>
 
 #pragma mark ---- Static Variables ----
 InputManager *Input::smManager = 0;

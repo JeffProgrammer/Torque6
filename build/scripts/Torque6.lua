@@ -106,6 +106,10 @@
 			linkoptions  { "-mmacosx-version-min=10.4" }
 
 		configuration "macosx"
+			files {
+				"../../engine/source/**.mm",
+				"../../engine/source/**.m",
+			}
 			includedirs {
 				"../../engine/lib/bgfx/include/compat/osx",
 			}

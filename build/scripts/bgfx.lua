@@ -18,17 +18,6 @@
             "../../engine/lib/bgfx/3rdparty/glsl-optimizer/src",
 		}
 
-		configuration { "xcode3 or xcode4 or osx or ios" }
-			includedirs {
-				"../../engine/lib/bgfx/include/compat/osx",
-			}
-
-		configuration { "vs20* or mingw*" }
-			includedirs {
-				"../../engine/lib/bgfx/include/compat/msvc",
-				"$(DXSDK_DIR)/Include",
-			}
-
 		files {
 			"../../engine/lib/bgfx/src/**.h",
             "../../engine/lib/bgfx/src/**.c",
@@ -59,17 +48,26 @@
             "../../engine/lib/bgfx/tools/shaderc/**.cpp",
 		}
 
-		configuration { "xcode3 or xcode4 or osx or ios" }
-			files {
-				"../../engine/lib/bgfx/src/**.mm",
-			}
-
         removefiles {
             "../../engine/lib/bgfx/src/**.bin.h",
             "../../engine/lib/bgfx/common/**.ttf.h",
             "../../engine/lib/bgfx/common/**.bin.h",
 			"../../engine/lib/bgfx/3rdparty/fcpp/usecpp.c",
         }
+
+		configuration { "xcode3 or xcode4 or osx or ios" }
+			files {
+				"../../engine/lib/bgfx/src/**.mm",
+			}
+			includedirs {
+				"../../engine/lib/bgfx/include/compat/osx",
+			}
+
+		configuration { "vs20* or mingw*" }
+			includedirs {
+				"../../engine/lib/bgfx/include/compat/msvc",
+				"$(DXSDK_DIR)/Include",
+			}
 
 		configuration "Debug"
 			defines { "TORQUE_DEBUG" }

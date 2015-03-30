@@ -28,6 +28,8 @@
 #import "platform/platformSemaphore.h"
 #import "platform/threads/mutex.h"
 #import "console/console.h"
+#import <CoreFoundation/CoreFoundation.h>
+#import <Cocoa/Cocoa.h>
 
 //-----------------------------------------------------------------------------
 
