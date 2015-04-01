@@ -99,7 +99,16 @@
 		configuration "macosx"
 			targetdir   "../bin/darwin"
 			defines     {  }
-			links       { "CoreServices.framework" }
+			links       {
+				"CoreServices.framework",
+				"CoreFoundation.framework",
+				"Foundation.framework",
+				"AVFoundation.framework"
+				"CoreData.framework"
+				"Cocoa.framework",
+				"OpenAL.framework",
+				"OpenGL.framework"
+			}
 
 		configuration { "macosx", "gmake" }
 			buildoptions { "-mmacosx-version-min=10.4" }
