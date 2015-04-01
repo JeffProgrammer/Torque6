@@ -99,15 +99,15 @@
 		configuration "macosx"
 			targetdir   "../bin/darwin"
 			defines     {  }
-			links       {
+			links {
 				"CoreServices.framework",
 				"CoreFoundation.framework",
 				"Foundation.framework",
-				"AVFoundation.framework"
-				"CoreData.framework"
+				"AVFoundation.framework",
+				"CoreData.framework",
 				"Cocoa.framework",
 				"OpenAL.framework",
-				"OpenGL.framework"
+				"OpenGL.framework",
 			}
 
 		configuration { "macosx", "gmake" }
@@ -123,12 +123,16 @@
 				"../../engine/lib/bgfx/include/compat/osx",
 			}
 			removefiles {
-				"../../engine/source/platform/**.unix.cc",
 				"../../engine/source/platformAndroid/**",
 				"../../engine/source/platformEmscripten/**",
 				"../../engine/source/platformiOS/**",
 				"../../engine/source/platformWin32/**",
 				"../../engine/source/platformX86UNIX/**",
+				"../../engine/source/**.asm",
+				"../../engine/source/math/mMathSSE.cc",
+				"../../engine/source/math/mMathAMD.cc",
+				"../../engine/source/input/leapMotion/**",
+				"../../engine/source/testing/**",
 			}
 
 		configuration "vs* or mingw*"

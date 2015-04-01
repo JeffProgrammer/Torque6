@@ -33,6 +33,8 @@
 #include <errno.h>
 #include <sys/time.h>
 
+#import <CoreFoundation/CoreFoundation.h>
+
 // Header clean-up by William Taysom
 #include <sys/ioctl.h>
 
